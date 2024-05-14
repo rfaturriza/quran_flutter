@@ -21,8 +21,8 @@ class LanguageSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Locale?>> getLatinLanguageSetting() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      final String? localeString = await box.get(HiveConst.latinLanguageKey);
+      var box = await hive.openBox(HiveBoxConst.languageBox);
+      final String? localeString = await box.get(HiveKeyConst.latinLanguageKey);
       if (localeString == null) {
         return right(null);
       }
@@ -42,9 +42,9 @@ class LanguageSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Locale?>> getPrayerLanguageSetting() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
+      var box = await hive.openBox(HiveBoxConst.languageBox);
       final String? localeString =
-          await box.get(HiveConst.prayerTimeLanguageKey);
+          await box.get(HiveKeyConst.prayerTimeLanguageKey);
       if (localeString == null) {
         return right(null);
       }
@@ -63,8 +63,8 @@ class LanguageSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Locale?>> getQuranLanguageSetting() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      final String? localeString = await box.get(HiveConst.quranLanguageKey);
+      var box = await hive.openBox(HiveBoxConst.languageBox);
+      final String? localeString = await box.get(HiveKeyConst.quranLanguageKey);
       if (localeString == null) {
         return right(null);
       }
@@ -83,9 +83,9 @@ class LanguageSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setLatinLanguageSetting(Locale locale) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
+      var box = await hive.openBox(HiveBoxConst.languageBox);
       final localeString = '${locale.languageCode}_${locale.countryCode}';
-      await box.put(HiveConst.latinLanguageKey, localeString);
+      await box.put(HiveKeyConst.latinLanguageKey, localeString);
       return right(unit);
     } catch (e) {
       return left(
@@ -99,9 +99,9 @@ class LanguageSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setPrayerLanguageSetting(Locale locale) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
+      var box = await hive.openBox(HiveBoxConst.languageBox);
       final localeString = '${locale.languageCode}_${locale.countryCode}';
-      await box.put(HiveConst.prayerTimeLanguageKey, localeString);
+      await box.put(HiveKeyConst.prayerTimeLanguageKey, localeString);
       return right(unit);
     } catch (e) {
       return left(
@@ -115,9 +115,9 @@ class LanguageSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setQuranLanguageSetting(Locale locale) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
+      var box = await hive.openBox(HiveBoxConst.languageBox);
       final localeString = '${locale.languageCode}_${locale.countryCode}';
-      await box.put(HiveConst.quranLanguageKey, localeString);
+      await box.put(HiveKeyConst.quranLanguageKey, localeString);
       return right(unit);
     } catch (e) {
       return left(

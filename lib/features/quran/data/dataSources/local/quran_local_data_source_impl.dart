@@ -20,7 +20,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, List<DataSurahModel>>> getAllSurah() async {
     try {
-      var box = await Hive.openBox(HiveConst.surahBox);
+      var box = await Hive.openBox(HiveBoxConst.surahBox);
       final listSurah = box.values.map((e) => jsonDecode(e)).toList();
       final result = listSurah.map((e) => DataSurahModel.fromJson(e)).toList();
       result.sort((a, b) {
@@ -47,7 +47,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   Future<Either<Failure, DataDetailJuzModel>> getDetailJuz(
       int juzNumber) async {
     try {
-      var box = await Hive.openBox(HiveConst.detailJuzBox);
+      var box = await Hive.openBox(HiveBoxConst.detailJuzBox);
       final key = juzNumber.toString();
       final jsonString = box.get(key);
       final result = DataDetailJuzModel.fromJson(jsonDecode(jsonString));
@@ -65,7 +65,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   Future<Either<Failure, DataDetailSurahModel>> getDetailSurah(
       int surahNumber) async {
     try {
-      var box = await Hive.openBox(HiveConst.detailSurahBox);
+      var box = await Hive.openBox(HiveBoxConst.detailSurahBox);
       final key = surahNumber.toString();
       final jsonString = box.get(key);
       final result = DataDetailSurahModel.fromJson(jsonDecode(jsonString));
@@ -82,7 +82,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, Unit>> setAllSurah(List<DataSurahModel> surah) async {
     try {
-      var box = await Hive.openBox(HiveConst.surahBox);
+      var box = await Hive.openBox(HiveBoxConst.surahBox);
       for (var item in surah) {
         final key = item.number.toString();
         final jsonString = jsonEncode(item.toJson());
@@ -101,7 +101,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, Unit>> setDetailJuz(DataDetailJuzModel juz) async {
     try {
-      var box = await Hive.openBox(HiveConst.detailJuzBox);
+      var box = await Hive.openBox(HiveBoxConst.detailJuzBox);
       final key = juz.juz.toString();
       final jsonString = jsonEncode(juz.toJson());
       await box.put(key, jsonString);
@@ -119,7 +119,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   Future<Either<Failure, Unit>> setDetailSurah(
       DataDetailSurahModel surah) async {
     try {
-      var box = await Hive.openBox(HiveConst.detailSurahBox);
+      var box = await Hive.openBox(HiveBoxConst.detailSurahBox);
       final key = surah.number.toString();
       final jsonString = jsonEncode(surah.toJson());
       await box.put(key, jsonString);
@@ -136,7 +136,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, List<LastReadJuzModel>>> getLastReadJuz() async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadJuzBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadJuzBox);
       final listJuz = box.values.map((e) => jsonDecode(e)).toList();
       final result = listJuz.map((e) => LastReadJuzModel.fromJson(e)).toList();
       return right(result);
@@ -152,7 +152,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, List<LastReadSurahModel>>> getLastReadSurah() async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadSurahBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadSurahBox);
       final listSurah = box.values.map((e) => jsonDecode(e)).toList();
       final result =
           listSurah.map((e) => LastReadSurahModel.fromJson(e)).toList();
@@ -171,7 +171,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
     LastReadJuzModel juz,
   ) async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadJuzBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadJuzBox);
       final key = juz.createdAt.millisecondsSinceEpoch.toString();
       final jsonString = jsonEncode(juz.toJson());
       await box.put(key, jsonString);
@@ -189,7 +189,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   Future<Either<Failure, Unit>> setLastReadSurah(
     LastReadSurahModel surah,) async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadSurahBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadSurahBox);
       final key = surah.createdAt.millisecondsSinceEpoch.toString();
       final jsonString = jsonEncode(surah.toJson());
       await box.put(key, jsonString);
@@ -206,7 +206,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, Unit>> deleteAllLastReadJuz() async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadJuzBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadJuzBox);
       await box.clear();
       return right(unit);
     } catch (e) {
@@ -221,7 +221,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, Unit>> deleteAllLastReadSurah() async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadSurahBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadSurahBox);
       await box.clear();
       return right(unit);
     } catch (e) {
@@ -236,7 +236,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, Unit>> deleteLastReadJuz(DateTime createdAt) async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadJuzBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadJuzBox);
       final key = createdAt.millisecondsSinceEpoch.toString();
       await box.delete(key);
       return right(unit);
@@ -252,7 +252,7 @@ class QuranLocalDataSourceImpl implements QuranLocalDataSource {
   @override
   Future<Either<Failure, Unit>> deleteLastReadSurah(DateTime createdAt) async {
     try {
-      var box = await Hive.openBox(HiveConst.lastReadSurahBox);
+      var box = await Hive.openBox(HiveBoxConst.lastReadSurahBox);
       final key = createdAt.millisecondsSinceEpoch.toString();
       await box.delete(key);
       return right(unit);

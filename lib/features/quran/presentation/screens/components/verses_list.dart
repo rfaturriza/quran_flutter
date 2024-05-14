@@ -262,16 +262,16 @@ class _VersesListState extends State<VersesList> {
     }
 
     Future<List<TajweedWord>?> checkCacheTajweed() async {
-      final settingBox = await Hive.openBox(HiveConst.settingBox);
+      final settingBox = await Hive.openBox(HiveBoxConst.settingBox);
       final isTajweedEnabled = settingBox.get(
-            HiveConst.tajweedStatusKey,
+            HiveKeyConst.tajweedStatusKey,
           ) ??
           true;
       if (!isTajweedEnabled) {
         return null;
       }
       final tajweedCacheBox = await Hive.openBox<TajweedWordList>(
-        HiveConst.tajweedCacheBox,
+        HiveBoxConst.tajweedCacheBox,
       );
       final key = () {
         if (widget.juz != null) {
@@ -288,7 +288,7 @@ class _VersesListState extends State<VersesList> {
 
     Future<void> saveCacheTajweed(List<TajweedWord> tajweedWords) async {
       final tajweedCacheBox = await Hive.openBox<TajweedWordList>(
-        HiveConst.tajweedCacheBox,
+        HiveBoxConst.tajweedCacheBox,
       );
       final key = () {
         if (widget.juz != null) {

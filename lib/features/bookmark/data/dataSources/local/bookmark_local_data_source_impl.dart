@@ -20,7 +20,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
   Future<Either<Failure, Unit>> addJuzBookmark(
       JuzBookmarkModel juzBookmark) async {
     try {
-      var box = await Hive.openBox(HiveConst.juzBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.juzBookmarkBox);
       final key = juzBookmark.number.toString();
       final jsonString = jsonEncode(juzBookmark.toJson());
       await box.put(key, jsonString);
@@ -40,7 +40,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
     SurahBookmarkModel surahBookmark,
   ) async {
     try {
-      var box = await Hive.openBox(HiveConst.surahBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.surahBookmarkBox);
       final key = surahBookmark.surahName.short ?? emptyString;
       final jsonString = jsonEncode(surahBookmark.toJson());
       await box.put(key, jsonString);
@@ -60,7 +60,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
     VerseBookmarkModel verseBookmark,
   ) async {
     try {
-      var box = await Hive.openBox(HiveConst.verseBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.verseBookmarkBox);
       final key = verseBookmark.verseNumber.toString();
       final jsonString = jsonEncode(verseBookmark.toJson());
       await box.put(key, jsonString);
@@ -83,7 +83,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
     JuzBookmarkModel juzBookmark,
   ) async {
     try {
-      var box = await Hive.openBox(HiveConst.juzBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.juzBookmarkBox);
       final key = juzBookmark.number.toString();
       await box.delete(key);
       return right(unit);
@@ -101,7 +101,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
     SurahBookmarkModel surahBookmark,
   ) async {
     try {
-      var box = await Hive.openBox(HiveConst.surahBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.surahBookmarkBox);
       final key = surahBookmark.surahName.short;
       await box.delete(key);
       return right(unit);
@@ -121,7 +121,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
     VerseBookmarkModel verseBookmark,
   ) async {
     try {
-      var box = await Hive.openBox(HiveConst.verseBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.verseBookmarkBox);
       final key = verseBookmark.verseNumber.toString();
       await box.delete(key);
       return right(unit);
@@ -140,7 +140,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
   @override
   Future<Either<Failure, List<JuzBookmarkModel>>> getListJuzBookmark() async {
     try {
-      var box = await Hive.openBox(HiveConst.juzBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.juzBookmarkBox);
       final list = box.values.map((e) => jsonDecode(e)).toList();
       final result = list.map((e) => JuzBookmarkModel.fromJson(e)).toList();
       return Future.value(right(result));
@@ -156,7 +156,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
   @override
   Future<Either<Failure, List<SurahBookmarkModel>>> getListSurahBookmark() async {
     try {
-      var box = await Hive.openBox(HiveConst.surahBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.surahBookmarkBox);
       final list = box.values.map((e) => jsonDecode(e)).toList();
       final result = list.map((e) => SurahBookmarkModel.fromJson(e)).toList();
       return Future.value(right(result));
@@ -172,7 +172,7 @@ class BookmarkLocalDataSourceImpl implements BookmarkLocalDataSource {
   @override
   Future<Either<Failure, List<VerseBookmarkModel>>> getListVersesBookmark() async {
     try {
-      var box = await Hive.openBox(HiveConst.verseBookmarkBox);
+      var box = await Hive.openBox(HiveBoxConst.verseBookmarkBox);
       final list = box.values.map((e) => jsonDecode(e)).toList();
       final result = list.map((e) => VerseBookmarkModel.fromJson(e)).toList();
       return Future.value(right(result));

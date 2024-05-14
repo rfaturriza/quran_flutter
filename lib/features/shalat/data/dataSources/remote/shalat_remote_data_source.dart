@@ -4,7 +4,8 @@ import 'package:quranku/features/shalat/data/models/schedule_model.codegen.dart'
 import 'package:quranku/features/shalat/data/models/shalat_location_model.codegen.dart';
 
 abstract class ShalatRemoteDataSource {
-  Future<Either<Failure, ShalatLocationResponseModel>> getShalatLocation(String city);
+  Future<Either<Failure, ShalatLocationResponseModel>> getShalatLocation(
+      String city);
 
   Future<Either<Failure, ScheduleResponseByDayModel>> getShalatScheduleByDay(
     String cityId,
@@ -12,5 +13,8 @@ abstract class ShalatRemoteDataSource {
   );
 
   Future<Either<Failure, ScheduleResponseByMonthModel>>
-      getShalatScheduleByMonth(String cityId, String month);
+      getShalatScheduleByMonth(
+    String cityId,
+    String month,
+  );
 }

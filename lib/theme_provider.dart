@@ -21,8 +21,8 @@ class ThemeProvider with ChangeNotifier {
 
   void setDynamicColor(bool value) {
     try {
-      var box = Hive.box(HiveConst.themeModeBox);
-      const key = HiveConst.dynamicColorKey;
+      var box = Hive.box(HiveBoxConst.themeModeBox);
+      const key = HiveKeyConst.dynamicColorKey;
       box.put(key, value);
       _dynamicColor = value;
       notifyListeners();
@@ -34,8 +34,8 @@ class ThemeProvider with ChangeNotifier {
 
   void getDynamicColor() async {
     try {
-      var box = await Hive.openBox(HiveConst.themeModeBox);
-      const key = HiveConst.dynamicColorKey;
+      var box = await Hive.openBox(HiveBoxConst.themeModeBox);
+      const key = HiveKeyConst.dynamicColorKey;
       final bool dynamicColor = box.get(key, defaultValue: false);
       _dynamicColor = dynamicColor;
       notifyListeners();
@@ -46,8 +46,8 @@ class ThemeProvider with ChangeNotifier {
   }
 
   void getThemeMode() async {
-    var box = await Hive.openBox(HiveConst.themeModeBox);
-    const key = HiveConst.themeModeKey;
+    var box = await Hive.openBox(HiveBoxConst.themeModeBox);
+    const key = HiveKeyConst.themeModeKey;
     final String themeMode = box.get(key, defaultValue: ThemeMode.system.name);
     if (themeMode == ThemeMode.system.name) {
       _themeMode = ThemeMode.system;
@@ -63,8 +63,8 @@ class ThemeProvider with ChangeNotifier {
 
   void setThemeMode(ThemeMode value) {
     _themeMode = value;
-    var box = Hive.box(HiveConst.themeModeBox);
-    const key = HiveConst.themeModeKey;
+    var box = Hive.box(HiveBoxConst.themeModeBox);
+    const key = HiveKeyConst.themeModeKey;
     box.put(key, value.name);
     notifyListeners();
   }

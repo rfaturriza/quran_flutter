@@ -19,8 +19,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, String?>> getArabicFontFamily() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      final String? fontFamily = await box.get(HiveConst.arabicFontFamilyKey);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      final String? fontFamily = await box.get(HiveKeyConst.arabicFontFamilyKey);
       return right(fontFamily);
     } catch (e) {
       return left(
@@ -34,8 +34,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, double?>> getArabicFontSize() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      final double? fontSize = await box.get(HiveConst.arabicFontSizeKey);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      final double? fontSize = await box.get(HiveKeyConst.arabicFontSizeKey);
       return right(fontSize);
     } catch (e) {
       return left(
@@ -49,8 +49,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, double?>> getLatinFontSize() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      final double? fontSize = await box.get(HiveConst.latinFontSizeKey);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      final double? fontSize = await box.get(HiveKeyConst.latinFontSizeKey);
       return right(fontSize);
     } catch (e) {
       return left(
@@ -64,8 +64,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, double?>> getTranslationFontSize() async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      final double? fontSize = await box.get(HiveConst.translationFontSizeKey);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      final double? fontSize = await box.get(HiveKeyConst.translationFontSizeKey);
       return right(fontSize);
     } catch (e) {
       return left(
@@ -79,8 +79,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setArabicFontFamily(String fontFamily) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      await box.put(HiveConst.arabicFontFamilyKey, fontFamily);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.arabicFontFamilyKey, fontFamily);
       return right(unit);
     } catch (e) {
       return left(
@@ -94,8 +94,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setArabicFontSize(double fontSize) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      await box.put(HiveConst.arabicFontSizeKey, fontSize);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.arabicFontSizeKey, fontSize);
       return right(unit);
     } catch (e) {
       return left(
@@ -109,8 +109,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setLatinFontSize(double fontSize) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      await box.put(HiveConst.latinFontSizeKey, fontSize);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.latinFontSizeKey, fontSize);
       return right(unit);
     } catch (e) {
       return left(
@@ -124,8 +124,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setTranslationFontSize(double fontSize) async {
     try {
-      var box = await hive.openBox(HiveConst.languageBox);
-      await box.put(HiveConst.translationFontSizeKey, fontSize);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.translationFontSizeKey, fontSize);
       return right(unit);
     } catch (e) {
       return left(
@@ -139,8 +139,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setLastReadReminder(LastReadReminderModes mode) async {
     try {
-      var box = await hive.openBox(HiveConst.settingBox);
-      await box.put(HiveConst.lastReadRemindersModeKey, mode.name);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.lastReadRemindersModeKey, mode.name);
       return right(unit);
     } catch (e) {
       return left(
@@ -154,8 +154,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, LastReadReminderModes>> getLastReadReminder() async {
     try {
-      var box = await hive.openBox(HiveConst.settingBox);
-      final mode = box.get(HiveConst.lastReadRemindersModeKey);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      final mode = box.get(HiveKeyConst.lastReadRemindersModeKey);
       final LastReadReminderModes isReminders = LastReadReminderModes.values.firstWhere(
         (e) => e.name == mode,
       );
@@ -172,8 +172,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, bool?>> getShowLatin() async {
     try {
-      var box = await hive.openBox(HiveConst.settingBox);
-      final bool? isShowLatins = await box.get(HiveConst.latinLanguageKey);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      final bool? isShowLatins = await box.get(HiveKeyConst.latinLanguageKey);
       return right(isShowLatins);
     } catch (e) {
       return left(
@@ -187,9 +187,9 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, bool?>> getShowTranslation() async {
     try {
-      var box = await hive.openBox(HiveConst.settingBox);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
       final bool? isShowTranslations =
-          await box.get(HiveConst.translationFontSizeKey);
+          await box.get(HiveKeyConst.translationFontSizeKey);
       return right(isShowTranslations);
     } catch (e) {
       return left(
@@ -203,8 +203,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setShowLatin(bool isShow) async {
     try {
-      var box = await hive.openBox(HiveConst.settingBox);
-      await box.put(HiveConst.latinLanguageKey, isShow);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.latinLanguageKey, isShow);
       return right(unit);
     } catch (e) {
       return left(
@@ -218,8 +218,8 @@ class StylingSettingLocalDataSourceImpl
   @override
   Future<Either<Failure, Unit>> setShowTranslation(bool isShow) async {
     try {
-      var box = await hive.openBox(HiveConst.settingBox);
-      await box.put(HiveConst.translationFontSizeKey, isShow);
+      var box = await hive.openBox(HiveBoxConst.settingBox);
+      await box.put(HiveKeyConst.translationFontSizeKey, isShow);
       return right(unit);
     } catch (e) {
       return left(

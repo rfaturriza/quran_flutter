@@ -274,8 +274,8 @@ class StylingSettingBloc
   }
 
   void _onGetColoredTajweedStatus(_GetColoredTajweedStatus event, emit) async {
-    final settingBox = await Hive.openBox(HiveConst.settingBox);
-    final isColoredTajweedEnabled = settingBox.get(HiveConst.tajweedStatusKey) ?? true;
+    final settingBox = await Hive.openBox(HiveBoxConst.settingBox);
+    final isColoredTajweedEnabled = settingBox.get(HiveKeyConst.tajweedStatusKey) ?? true;
     emit(state.copyWith(
       isColoredTajweedEnabled: isColoredTajweedEnabled,
     ));
