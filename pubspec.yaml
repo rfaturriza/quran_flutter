@@ -53,6 +53,7 @@ dependencies:
   webview_flutter: ^4.4.4
   firebase_remote_config: ^4.3.8
   dynamic_color: ^1.7.0
+  jhijri: ^1.0.0
 
 dev_dependencies:
   flutter_test:

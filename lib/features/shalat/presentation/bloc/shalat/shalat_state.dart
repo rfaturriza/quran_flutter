@@ -9,6 +9,8 @@ class ShalatState with _$ShalatState {
     Either<Failure, ScheduleByDay?>? scheduleByDay,
     Either<Failure, ScheduleByMonth?>? scheduleByMonth,
     GeoLocation? geoLocation,
+    Either<Failure, PrayerScheduleSetting?>? prayerScheduleSetting,
+    Either<Failure, GeoLocation?>? manualLocation,
     @Default(false) bool isLoading,
   }) = _ShalatState;
 }

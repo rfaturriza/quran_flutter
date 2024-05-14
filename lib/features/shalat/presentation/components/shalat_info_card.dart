@@ -21,6 +21,7 @@ import '../../../quran/presentation/screens/components/juz_list.dart';
 import '../../../quran/presentation/screens/components/surah_list.dart';
 import '../bloc/shalat/shalat_bloc.dart';
 import '../helper/helper_time_shalat.dart';
+import '../screens/prayer_schedule_screen.dart';
 
 class ShalatInfoCard extends StatelessWidget {
   const ShalatInfoCard({super.key});
@@ -80,8 +81,8 @@ class ShalatInfoCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 17.5,
               ),
@@ -89,9 +90,14 @@ class ShalatInfoCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _PrayTimeInfo(),
-                  Divider(thickness: 2),
-                  _LastReadInfo(),
+                  InkWell(
+                    child: const _PrayTimeInfo(),
+                    onTap: () {
+                      context.navigateTo(const PrayerScheduleScreen());
+                    },
+                  ),
+                  const Divider(thickness: 2),
+                  const _LastReadInfo(),
                 ],
               ),
             ),

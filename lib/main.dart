@@ -23,17 +23,14 @@ import 'features/quran/presentation/utils/tajweed_rule.dart';
 import 'features/quran/presentation/utils/tajweed_subrule.dart';
 import 'features/quran/presentation/utils/tajweed_word.dart';
 import 'firebase_options.dart';
+import 'hive_adapter_register.dart';
 import 'injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(TajweedTokenAdapter());
-  Hive.registerAdapter(TajweedWordAdapter());
-  Hive.registerAdapter(TajweedWordListAdapter());
-  Hive.registerAdapter(TajweedRuleAdapter());
-  Hive.registerAdapter(TajweedSubruleAdapter());
+  await registerHiveAdapter();
   await configureDependencies();
   await dotenv.load(fileName: ".env");
   unawaited(MobileAds.instance.initialize());

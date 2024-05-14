@@ -40,5 +40,7 @@ class HiveTypeConst {
   static const int tajweedWord = 4;
   static const int tajweedWordList = 5;
   static const int prayerAlarmModel = 6;
-  static const int prayerAlarmScheduleModel = 7;
+  static const int prayerScheduleSettingModel = 7;
+  static const int geoLocation = 8;
+  static const int coordinate = 9;
 }

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:adhan/adhan.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../domain/entities/schedule.codegen.dart';
@@ -217,6 +218,25 @@ class HelperTimeShalat {
       return schedule.isya;
     } else {
       return '-';
+    }
+  }
+
+  static String getPrayerNameByEnum(Prayer prayer, Locale? locale) {
+    switch (prayer) {
+      case Prayer.fajr:
+        return prayerNameByLocale(locale)[1];
+      case Prayer.sunrise:
+        return prayerNameByLocale(locale)[2];
+      case Prayer.dhuhr:
+        return prayerNameByLocale(locale)[4];
+      case Prayer.asr:
+        return prayerNameByLocale(locale)[5];
+      case Prayer.maghrib:
+        return prayerNameByLocale(locale)[6];
+      case Prayer.isha:
+        return prayerNameByLocale(locale)[7];
+      default:
+        return '-';
     }
   }
 }

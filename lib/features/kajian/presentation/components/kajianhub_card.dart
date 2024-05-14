@@ -126,6 +126,8 @@ class _RecitationInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final shalatBloc = context.read<ShalatBloc>();
     return BlocListener<ShalatBloc, ShalatState>(
+      listenWhen: (previous, current) =>
+          previous.locationStatus != current.locationStatus,
       listener: (context, state) {
         if (state.locationStatus?.status.isGranted == true) {
           context.read<KajianBloc>().add(

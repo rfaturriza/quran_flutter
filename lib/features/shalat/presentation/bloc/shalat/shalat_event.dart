@@ -22,4 +22,17 @@ class ShalatEvent with _$ShalatEvent {
   const factory ShalatEvent.onChangedLocationStatusEvent({
     LocationStatus? status,
   }) = _OnChangedLocationStatusEvent;
+
+  const factory ShalatEvent.getLocationManualEvent() = _GetLocationManualEvent;
+
+  const factory ShalatEvent.setLocationManualEvent({
+    required GeoLocation location,
+  }) = _SetLocationManualEvent;
+
+  const factory ShalatEvent.getPrayerScheduleSettingEvent() =
+      _GetPrayerScheduleSettingEvent;
+
+  const factory ShalatEvent.setPrayerScheduleSettingEvent({
+    required PrayerScheduleSetting? model,
+  }) = _SetPrayerScheduleSettingEvent;
 }

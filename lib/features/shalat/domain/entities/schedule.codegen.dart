@@ -1,9 +1,12 @@
 import 'package:adhan/adhan.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
+import 'package:quranku/core/constants/hive_constants.dart';
 import 'package:quranku/features/shalat/data/models/schedule_model.codegen.dart';
 
 part 'schedule.codegen.freezed.dart';
+part 'schedule.codegen.g.dart';
 
 @freezed
 class ScheduleByDay with _$ScheduleByDay {
@@ -98,12 +101,13 @@ class Schedule with _$Schedule {
 }
 
 @freezed
+@HiveType(typeId: HiveTypeConst.coordinate)
 class Coordinate with _$Coordinate {
   const factory Coordinate({
-    double? lat,
-    double? lon,
-    String? latitude,
-    String? longitude,
+    @HiveField(0) double? lat,
+    @HiveField(1) double? lon,
+    @HiveField(2) String? latitude,
+    @HiveField(3) String? longitude,
   }) = _Coordinate;
 
   const Coordinate._();
